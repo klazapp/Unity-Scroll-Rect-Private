@@ -1,49 +1,88 @@
-# Klazapp Script Creator for Unity
+# Enhanced Scroller
 
 ## Introduction
-The Klazapp Script Creator is a powerful Unity Editor tool designed to automate the creation of scripts from predefined templates. This tool enhances productivity by providing developers with quick access to generating both MonoBehaviour and ScriptableObject scripts, ensuring that scripts adhere to project standards and reducing manual setup time.
+The Enhanced Scroller package provides a set of utilities to create smooth and customizable scrollable UI elements in Unity. It includes various easing functions for tweening animations and a powerful framework for handling large data sets efficiently.
 
 ## Features
-- **Script Generation**: Instantly generate scripts for MonoBehaviour and ScriptableObject directly from the Unity Editor.
-- **Easy Access**: Accessible through menu selections and right-click context menus in the Project window.
-- **Template Customization**: Comes with editable templates for common script types, ensuring consistency across your projects.
-- **Context Sensitivity**: Validates directories to prevent scripts from being created in restricted areas such as `Packages` or `Editor`.
+- **Advanced Tweening:** Includes a variety of easing functions for smooth animations.
+- **Efficient Data Handling:** Optimized for handling large data sets with minimal performance overhead.
+- **Easy Integration:** Simple and modular components that can be easily integrated into existing projects.
+- **Customizable Scroll Rects:** Supports customization of scroll behaviors and animations.
 
 ## Dependencies
-This tool requires:
-- **Unity 2020.3 LTS or newer**: Ensures compatibility and stability within the latest Unity environments.
+- Unity 2020.3 LTS or newer
 
 ## Compatibility
+
 | Compatibility | URP | BRP | HDRP |
 |---------------|-----|-----|------|
 | Compatible    | ✔️   | ✔️   | ✔️    |
 
 ## Installation
-1. Clone or download the repository containing the Klazapp Script Creator.
-2. Import the tool into your Unity project via `Assets > Import Package > Custom Package`.
-3. Ensure the tool's scripts are placed under the `Packages` or `Assets` directory to maintain proper script compilation.
+1. Download or clone the repository.
+2. Add the `EnhancedScroller` folder to your Unity project.
+3. Attach the relevant components (`EnhancedScroller`, `EnhancedScrollerCellView`, `Tween`, etc.) to your UI elements.
 
 ## Usage
-To utilize the Script Creator, follow these steps:
-- **For MonoBehaviour Scripts**:
-  - Navigate to `Klazapp > Create > MonoBehaviour Script` in the Unity main menu.
-  - Alternatively, right-click in the Project window and select `Assets > Create > Klazapp > MonoBehaviour Script`.
-- **For ScriptableObject Scripts**:
-  - Choose `Klazapp > Create > ScriptableObject Script` from the Unity main menu.
-  - Or, right-click in the Project window and go to `Assets > Create > Klazapp > ScriptableObject Script`.
+### Setting Up the Scroller
+1. Create a `ScrollRect` in your scene.
+2. Attach the `EnhancedScroller` component to the `ScrollRect`.
+3. Create a cell prefab and attach the `EnhancedScrollerCellView` component.
+4. Implement the `EnhancedScrollerDelegate` interface in a script to provide data to the scroller.
 
-Scripts will be instantiated in the selected directory within the Project window, with checks to prevent creation in non-asset directories.
+### Example Code
+```csharp
+using UnityEngine;
+using EnhancedUI.EnhancedScroller;
 
-## Customization
-Customize script templates by modifying the files located at:
-- **MonoBehaviour**: `Packages/com.klazapp.scriptcreator/Editor/Data/MonoBehaviourTemplate.cs.txt`
-- **ScriptableObject**: `Packages/com.klazapp.scriptcreator/Editor/Data/ScriptableObjectTemplate.cs.txt`
+public class MyScrollerController : MonoBehaviour, IEnhancedScrollerDelegate
+{
+    public EnhancedScroller myScroller;
+    public EnhancedScrollerCellView myCellViewPrefab;
 
-Adjust these templates to meet specific coding guidelines or project requirements.
+    private List<string> myData;
 
-## To-Do List (Future Features)
-- **Extended Script Types**: Include templates for custom editors, interfaces, and other Unity script types.
-- **GUI for Template Management**: Develop a user interface within Unity to manage and customize script templates directly.
+    void Start()
+    {
+        myData = new List<string> { "Item 1", "Item 2", "Item 3" };
+        myScroller.Delegate = this;
+        myScroller.ReloadData();
+    }
+
+    public int GetNumberOfCells(EnhancedScroller scroller)
+    {
+        return myData.Count;
+    }
+
+    public float GetCellViewSize(EnhancedScroller scroller, int dataIndex)
+    {
+        return 100f; // Set your cell size
+    }
+
+    public EnhancedScrollerCellView GetCellView(EnhancedScroller scroller, int dataIndex, int cellIndex)
+    {
+        var cellView = scroller.GetCellView(myCellViewPrefab) as MyCellView;
+        cellView.SetData(myData[dataIndex]);
+        return cellView;
+    }
+}
+
+public class MyCellView : EnhancedScrollerCellView
+{
+    public Text myText;
+
+    public void SetData(string data)
+    {
+        myText.text = data;
+    }
+}
+```
+
+## To-Do List
+- Add more easing functions.
+- Improve documentation and add more usage examples.
+- Optimize performance for larger data sets.
+- Add support for dynamic content updates.
 
 ## License
-The Klazapp Script Creator is distributed under the MIT License, allowing for extensive customization and use in both personal and commercial projects. See the LICENSE.md file for more details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

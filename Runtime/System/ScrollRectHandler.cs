@@ -220,8 +220,6 @@ namespace com.Klazapp.Utility
 
         public void RefreshVisibleCells(CellEntity cellEntity)
         {
-           cellEntity.SetData(cellEntity.CellComponent);
-           
             foreach (var kvp in visibleCells)
             {
                 kvp.Value.SetData(cellData[kvp.Key]);

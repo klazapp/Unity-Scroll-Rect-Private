@@ -310,11 +310,11 @@ namespace com.Klazapp.Utility
 
         protected virtual void OnCreated()
         {
-            // Example data population
-            for (var i = 0; i < 100; i++) // Set data count to 100
-            {
-                cellData.Add((T)System.Activator.CreateInstance(typeof(T), new object[] { i }));
-            }
+            // // Example data population
+            // for (var i = 0; i < 100; i++) // Set data count to 100
+            // {
+            //     cellData.Add((T)System.Activator.CreateInstance(typeof(T), new object[] { i }));
+            // }
 
             itemHeight = cellInfo.entity.GetComponent<RectTransform>().rect.height;
             InitializePool();

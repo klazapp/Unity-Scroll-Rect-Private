@@ -218,7 +218,7 @@ namespace com.Klazapp.Utility
             UpdateVisibleItems();
         }
 
-        public void RefreshVisibleCells(CellEntity cellEntity)
+        public void RefreshVisibleCells()
         {
             foreach (var kvp in visibleCells)
             {

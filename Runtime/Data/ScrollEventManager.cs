@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace com.Klazapp.Utility
 {
-    public class ScrollEventManager : MonoBehaviour
+    public class ScrollEventManager 
     {
-        public static event Action<CellEntity> OnTriggerCellClicked;
-        public static void InvokeCellClicked(CellEntity cellEntity)
+        public  event Action<CellEntity> OnTriggerCellClicked;
+        public  void InvokeCellClicked(CellEntity cellEntity)
         {
             OnTriggerCellClicked?.Invoke(cellEntity);
         }

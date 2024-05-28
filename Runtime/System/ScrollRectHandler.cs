@@ -204,7 +204,7 @@ namespace com.Klazapp.Utility
         
         protected virtual void OnDisable()
         {
-            ScrollEventManager.OnTriggerCellClicked -= CellClickedCallback;
+            scrollEventManager.OnTriggerCellClicked -= CellClickedCallback;
         }
 
         protected virtual void Update()

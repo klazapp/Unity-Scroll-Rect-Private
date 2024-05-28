@@ -191,14 +191,17 @@ namespace com.Klazapp.Utility
         protected int lastLastVisibleIndex = -1;
 
         protected List<int> indicesToRemove = new List<int>();
+
+        protected ScrollEventManager scrollEventManager;
         #endregion
 
         #region Lifecycle Flow
         protected virtual void OnEnable()
         {
-            ScrollEventManager.OnTriggerCellClicked += CellClickedCallback;
+            scrollEventManager ??= new ScrollEventManager();
+            scrollEventManager.OnTriggerCellClicked += CellClickedCallback;
         }
-
+        
         protected virtual void OnDisable()
         {
             ScrollEventManager.OnTriggerCellClicked -= CellClickedCallback;
@@ -303,7 +306,7 @@ namespace com.Klazapp.Utility
                 visibleCells[i] = item;
 
                 // Update item data here
-                item.SetData(cellData[i]);
+                item.SetData(cellData[i], scrollEventManager);
             }
         }
         #endregion

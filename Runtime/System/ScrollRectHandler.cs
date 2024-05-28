@@ -334,6 +334,11 @@ namespace com.Klazapp.Utility
             // Add spacing at the top and bottom
             var totalContentHeight = cellData.Count * (itemHeight + cellInfo.spacing) + cellInfo.spacing; // Correctly add spacing at the bottom
             content.sizeDelta = new Vector2(content.sizeDelta.x, totalContentHeight);
+
+            // Temporarily added this to ensure content will always be scrolled to the top
+            var anchoredPosition = content.anchoredPosition;
+            anchoredPosition.y = -totalContentHeight/2f ;
+            content.anchoredPosition = anchoredPosition;
         }
 
         #region Callbacks

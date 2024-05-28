@@ -217,6 +217,19 @@ namespace com.Klazapp.Utility
             UpdateContentHeight();
             UpdateVisibleItems();
         }
+
+        public void UpdateCellSelection(T2 selectedCell)
+        {
+            foreach (var cellComponent in cellData)
+            {
+                cellComponent.selected = cellComponent.id == selectedCell.CellComponent.id;
+            }
+
+            foreach (var kvp in visibleCells)
+            {
+                kvp.Value.SetData(cellData[kvp.Key]);
+            }
+        }
         #endregion
 
         #region Modules

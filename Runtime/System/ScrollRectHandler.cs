@@ -427,7 +427,6 @@ namespace com.Klazapp.Utility
         #region Public Access
         public void SetData(List<T> cellData)
         {
-            Debug.Log("cell data count = " + cellData.Count);
             this.cellData = cellData;
             UpdateContentHeight();
             UpdateVisibleItems();

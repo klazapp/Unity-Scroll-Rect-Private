@@ -461,7 +461,7 @@ namespace com.Klazapp.Utility
 
             // Calculate the first visible index using the formula
             var firstVisibleIndex = math.max(0, (int)math.floor((contentAnchoredPositionY + viewportHeight / 2) / itemHeightWithSpacing));
-            var lastVisibleIndex = math.min(cellData.Count, firstVisibleIndex + (int)math.ceil(viewportHeight / itemHeightWithSpacing) + 2);
+            var lastVisibleIndex = math.min(cellData.Count, firstVisibleIndex + (int)math.ceil(viewportHeight / itemHeightWithSpacing) + 1);
 
             firstVisible = firstVisibleIndex;
             lastVisible = lastVisibleIndex;
@@ -557,14 +557,10 @@ namespace com.Klazapp.Utility
             // Add spacing at the top and bottom
             var totalContentHeight = cellData.Count * (itemHeight + cellInfo.spacing); // Correctly add spacing at the bottom
             content.sizeDelta = new Vector2(content.sizeDelta.x, totalContentHeight);
-            Debug.Log($"UpdateContentHeight: TotalContentHeight = {totalContentHeight}");
-            Debug.Log("cellData count = " + cellData.Count);
 
             // Temporarily added this to ensure content will always be scrolled to the top
             var anchoredPosition = content.anchoredPosition;
             anchoredPosition.y = -totalContentHeight / 2f;
-
-            Debug.Log("Settings content y pos = " + anchoredPosition.y);
 
             content.anchoredPosition = anchoredPosition;
         }

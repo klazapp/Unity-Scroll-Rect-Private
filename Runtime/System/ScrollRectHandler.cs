@@ -161,6 +161,7 @@
 // }
 #endregion
 
+#region Deprecated
 // using UnityEngine;
 // using System.Collections.Generic;
 // using System.Runtime.CompilerServices;
@@ -365,7 +366,7 @@
 //         #endregion
 //     }
 // }
-
+#endregion
 
 using UnityEngine;
 using System.Collections.Generic;
@@ -446,9 +447,6 @@ namespace com.Klazapp.Utility
         protected virtual void InitScrollRect()
         {
         }
-
-        public int firstVisible;
-        public int lastVisible;
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected virtual void UpdateVisibleItems()
@@ -459,11 +457,23 @@ namespace com.Klazapp.Utility
             var halfContentSizeDeltaY = content.sizeDelta.y / 2;
 
             // Calculate the first visible index using the formula
-            var firstVisibleIndex = math.max(0, (int)math.floor((contentAnchoredPositionY + viewportHeight / 2) / itemHeightWithSpacing));
-            var lastVisibleIndex = math.min(cellData.Count, firstVisibleIndex + (int)math.ceil(viewportHeight / itemHeightWithSpacing) + 1);
+            // var firstVisibleIndex = math.max(0, (int)math.floor((contentAnchoredPositionY + viewportHeight / 2) / itemHeightWithSpacing));
+            // var lastVisibleIndex = math.min(cellData.Count, firstVisibleIndex + (int)math.ceil(viewportHeight / itemHeightWithSpacing) + 1);
+            var contentTopYPos = -content.rect.height/2f;
+            var firstVisibleIndex = (int)math.ceil((contentAnchoredPositionY - contentTopYPos)/(itemHeightWithSpacing)) - 1;
+			
+            var permissibleCellCount = viewportHeight / itemHeightWithSpacing;
+            var lastVisibleIndex = (int)math.ceil(permissibleCellCount + firstVisibleIndex - 1) + 2;
+			
+            if(lastVisibleIndex > cellData.Count)
+            {
+                lastVisibleIndex = cellData.Count;
+            }
 
-            firstVisible = firstVisibleIndex;
-            lastVisible = lastVisibleIndex;
+            if(firstVisibleIndex < 0)
+            {
+                firstVisibleIndex = 0;
+            }
             
             if (firstVisibleIndex == lastFirstVisibleIndex && lastVisibleIndex == lastLastVisibleIndex)
                 return;

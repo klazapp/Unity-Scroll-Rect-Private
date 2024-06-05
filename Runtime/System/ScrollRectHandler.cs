@@ -403,13 +403,13 @@ namespace com.Klazapp.Utility
         #endregion
 
         #region Lifecycle Flow
-        protected virtual void OnEnable()
+        protected void OnSubscribe()
         {
             scrollEventManager ??= new ScrollEventManager();
             scrollEventManager.OnTriggerCellClicked += CellClickedCallback;
         }
 
-        protected virtual void OnDisable()
+        protected void OnUnsubscribe()
         {
             scrollEventManager.OnTriggerCellClicked -= CellClickedCallback;
         }

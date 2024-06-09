@@ -1,17 +1,16 @@
-using System;
-using UnityEngine;
-
 namespace com.Klazapp.Utility
 {
-    [Serializable]
-    public class CellComponent
+    public class CellComponent : ICellComponent
     {
-        [HideInInspector]
-        public int id;
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public CellType CellType { get; set; }
 
-        public CellComponent(int cellId)
+        public CellComponent(int id = 0, string name = "", CellType cellType = CellType.Cell)
         {
-            this.id = cellId;
+            Id = id;
+            Name = name;
+            this.CellType = cellType;
         }
     }
 }

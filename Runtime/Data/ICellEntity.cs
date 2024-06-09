@@ -1,9 +1,24 @@
+using UnityEngine;
+
 namespace com.Klazapp.Utility
 {
-    public interface ICellEntity<T> where T : CellComponent
+    public interface ICellEntity
     {
-        public T CellComponent { get; set; }
-        public void SetData(T comp, ScrollEventManager scrollEventManager = null);
-        public void OnButtonPressed();
+        public GameObject GameObject { get; }
+        public RectTransform RectTransform { get; }
+        
+        public ICellComponent CellComponent { get; set; }
+
+        public void SetData(ICellComponent comp, ScrollEventManager scrollEventManager = null);
+
+        public virtual void Activate(bool isActive)
+        {
+            GameObject.SetActive(isActive);
+        }
+        
+        public virtual void OnButtonPressed()
+        {
+            
+        }
     }
 }

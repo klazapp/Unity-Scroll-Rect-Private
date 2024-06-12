@@ -345,12 +345,12 @@ namespace com.Klazapp.Utility
             var deltaY = pivotDelta.y * scrollView.rect.height;
 
             //Set new pivot
-            scrollView.pivot = new Vector2(0.5f, 0.5f);
+            //scrollView.pivot = new Vector2(0.5f, 0.5f);
 
             //Adjust the position - this time adding deltaY
-            var anchoredPosition = scrollView.anchoredPosition;
-            anchoredPosition = new Vector2(anchoredPosition.x, anchoredPosition.y + deltaY);
-            scrollView.anchoredPosition = anchoredPosition;
+            // var anchoredPosition = scrollView.anchoredPosition;
+            // anchoredPosition = new Vector2(anchoredPosition.x, anchoredPosition.y + deltaY);
+            // scrollView.anchoredPosition = anchoredPosition;
 
             if (viewPort == null)
             {
